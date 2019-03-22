@@ -60,6 +60,7 @@
                 axios.post('/speaker', speaker)
                     .then(res => {
                         this.getRecord();
+                        this.name = '';
                     })
                     .catch( err => {
 

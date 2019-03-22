@@ -1894,6 +1894,8 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post('/speaker', speaker).then(function (res) {
         _this.getRecord();
+
+        _this.name = '';
       }).catch(function (err) {});
     },
     getRecord: function getRecord() {
