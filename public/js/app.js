@@ -1798,13 +1798,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addRecord: function addRecord() {
-      axios.post('/record').then();
-    },
-    getRecords: function getRecords() {
       var _this = this;
 
+      axios.post('/record').then(function (res) {
+        _this.getRecords();
+      });
+    },
+    getRecords: function getRecords() {
+      var _this2 = this;
+
       axios.get('/record').then(function (res) {
-        _this.records = res.data;
+        _this2.records = res.data;
       });
     },
     viewRecord: function viewRecord(id) {
@@ -49900,8 +49904,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\laragon\www\tmtools\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! c:\laragon\www\tmtools\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! c:\laragon\www\bsctools\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! c:\laragon\www\bsctools\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
