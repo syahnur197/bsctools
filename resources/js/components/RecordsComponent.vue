@@ -35,7 +35,9 @@
         methods: {
             addRecord() {
                 axios.post('/record')
-                    .then()
+                    .then(res => {
+                        this.getRecords()
+                    })
             },
             getRecords() {
                 axios.get('/record')
