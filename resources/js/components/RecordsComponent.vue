@@ -12,7 +12,11 @@
 
                     <ul class="my-2 list-group">
                         <li class="list-group-item" v-for="(record, index) in records" :key="index">
-                            <a :href="viewRecord(record.id)"><button class="btn btn-success">View</button></a>
+                            <div class="row">
+                                <div class="col-6"><a :href="viewRecord(record.id)"><button class="btn btn-success btn-block">View</button></a></div>
+                                <div class="col-6"><a :href="viewReport(record.id)"><button class="btn btn-success btn-block">Report</button></a></div>
+                            </div>
+
                             {{record.created_at}} by {{record.owner.name}}
                         </li>
                     </ul>
@@ -47,6 +51,9 @@
             },
             viewRecord(id) {
                 return "/record/"+id;
+            },
+            viewReport(id) {
+                return "/record/report/"+id;
             }
         },
         computed: {

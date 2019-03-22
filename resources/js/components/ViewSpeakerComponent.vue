@@ -1,5 +1,6 @@
 <template>
     <div>
+        <a :href="getRecordUrl"><i class="fa fa-arrow-left"></i>Back to record</a>
         <div class="row justify-content-center my-2">
             <div class="col-md-4">
                 <div class="card">
@@ -111,9 +112,13 @@
                             this.words = res.data;
                         }
                     })
-            }
+            },
         },
         computed: {
+            getRecordUrl() {
+                let url = "/record/"+this.speaker.record_id;
+                return url;
+            }
         }
 
     }

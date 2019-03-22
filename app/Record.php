@@ -21,4 +21,16 @@ class Record extends Model
     {
         return Carbon::parse($value)->format('d M Y');
     }
+
+    public function words()
+    {
+        return $this->hasManyThrough(
+            'App\Word',
+            'App\Speaker',
+            'record_id',
+            'speaker_id',
+            'id',
+            'id'
+        );
+    }
 }

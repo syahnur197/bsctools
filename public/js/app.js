@@ -1787,6 +1787,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1813,6 +1817,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     viewRecord: function viewRecord(id) {
       return "/record/" + id;
+    },
+    viewReport: function viewReport(id) {
+      return "/record/report/" + id;
     }
   },
   computed: {}
@@ -1990,6 +1997,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2052,7 +2060,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  computed: {}
+  computed: {
+    getRecordUrl: function getRecordUrl() {
+      var url = "/record/" + this.speaker.record_id;
+      return url;
+    }
+  }
 });
 
 /***/ }),
@@ -37120,13 +37133,29 @@ var render = function() {
             { staticClass: "my-2 list-group" },
             _vm._l(_vm.records, function(record, index) {
               return _c("li", { key: index, staticClass: "list-group-item" }, [
-                _c("a", { attrs: { href: _vm.viewRecord(record.id) } }, [
-                  _c("button", { staticClass: "btn btn-success" }, [
-                    _vm._v("View")
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-6" }, [
+                    _c("a", { attrs: { href: _vm.viewRecord(record.id) } }, [
+                      _c(
+                        "button",
+                        { staticClass: "btn btn-success btn-block" },
+                        [_vm._v("View")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-6" }, [
+                    _c("a", { attrs: { href: _vm.viewReport(record.id) } }, [
+                      _c(
+                        "button",
+                        { staticClass: "btn btn-success btn-block" },
+                        [_vm._v("Report")]
+                      )
+                    ])
                   ])
                 ]),
                 _vm._v(
-                  "\n                        " +
+                  "\n\n                        " +
                     _vm._s(record.created_at) +
                     " by " +
                     _vm._s(record.owner.name) +
@@ -37288,6 +37317,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("a", { attrs: { href: _vm.getRecordUrl } }, [
+      _c("i", { staticClass: "fa fa-arrow-left" }),
+      _vm._v("Back to record")
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center my-2" }, [
       _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "card" }, [

@@ -23,6 +23,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// record
 
 Route::get('/record', function() {
     // return response()->json(Record::all());
@@ -41,6 +42,11 @@ Route::get('/record/{record}', function(Request $request, Response $response, $r
         return response()->json($record);
     }
     return view('records.view', ['record_id' => $record]);
+});
+
+Route::get('/record/report/{record}', function(Request $request, Response $response, $record) {
+    $record = Record::with(['owner', 'speakers', 'words'])->find($record);
+    return view('records.report', ['record' => $record]);
 });
 
 // Speaker
