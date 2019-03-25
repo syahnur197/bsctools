@@ -10,7 +10,7 @@ class RecordsController extends Controller
 {
     public function index()
     {
-        return response()->json(Record::with('owner')->get());
+        return response()->json(Record::with('owner')->latest()->get());
     }
 
     public function store(Request $request, Response $response)
