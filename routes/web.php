@@ -23,25 +23,30 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // record
 
-Route::get('/record', 'RecordsController@index');
+Route::group(['middleware' => 'auth'], function () {
 
-Route::post('/record', 'RecordsController@store');
+    Route::get('/record', 'RecordsController@index');
 
-Route::get('/record/{record}', 'RecordsController@show');
+    Route::post('/record', 'RecordsController@store');
 
-Route::get('/record/get/{record}', 'RecordsController@get');
+    Route::get('/record/{record}', 'RecordsController@show');
 
-Route::get('/record/report/{record}', 'RecordsController@report');
+    Route::get('/record/get/{record}', 'RecordsController@get');
 
-// Speaker
+    Route::get('/record/report/{record}', 'RecordsController@report');
 
-Route::get('/speaker/{speaker}', 'SpeakersController@show');
+    // Speaker
 
-Route::post('/speaker', 'SpeakersController@store');
+    Route::get('/speaker/{speaker}', 'SpeakersController@show');
 
-Route::delete('/speaker/{speaker}', 'SpeakersController@destroy');
+    Route::post('/speaker', 'SpeakersController@store');
 
-// words
-Route::post('/word', 'WordsController@store');
+    Route::delete('/speaker/{speaker}', 'SpeakersController@destroy');
 
-Route::get('/word/{speaker}', 'WordsController@show');
+    // words
+    Route::post('/word', 'WordsController@store');
+
+    Route::get('/word/{speaker}', 'WordsController@show');
+
+});
+
