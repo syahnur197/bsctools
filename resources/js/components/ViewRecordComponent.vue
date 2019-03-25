@@ -1,5 +1,6 @@
 <template>
     <div>
+        <a href="/home"><i class="fa fa-arrow-left"></i>Back to list of records</a>
         <div class="row justify-content-center my-2">
             <div class="col-md-8">
                 <div class="card">
@@ -67,7 +68,7 @@
                     })
             },
             getRecord() {
-                let url = '/record/'+this.record_id;
+                let url = '/record/get/'+this.record_id;
                 axios.get(url)
                     .then(res => {
                         this.record = res.data;

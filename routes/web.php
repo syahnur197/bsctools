@@ -25,69 +25,25 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // record
 
-Route::get('/record', function() {
-    // return response()->json(Record::all());
-    return response()->json(Record::with('owner')->get());
-});
+Route::get('/record', 'RecordsController@index');
 
-Route::post('/record', function(Request $request, Response $response) {
-    $record = new Record();
-    $record->ahc_id = auth()->user()->id;
-    $record->save();
-});
+Route::post('/record', 'RecordsController@store');
 
-Route::get('/record/{record}', function(Request $request, Response $response, $record) {
-    if ($request->ajax()) {
-        $record = Record::with(['owner', 'speakers'])->find($record);
-        return response()->json($record);
-    }
-    return view('records.view', ['record_id' => $record]);
-});
+Route::get('/record/{record}', 'RecordsController@show');
 
-Route::get('/record/report/{record}', function(Request $request, Response $response, $record) {
-    $record = Record::with(['owner', 'speakers', 'words'])->find($record);
-    return view('records.report', ['record' => $record]);
-});
+Route::get('/record/get/{record}', 'RecordsController@get');
+
+Route::get('/record/report/{record}', 'RecordsController@report');
 
 // Speaker
 
-Route::get('/speaker/{speaker}', function (Request $request, Response $response, $speaker) {
-    $speaker = Speaker::find($speaker);
-    return view('speakers.view', ['speaker' => $speaker]);
-});
+Route::get('/speaker/{speaker}', 'SpeakersController@show');
 
-Route::post('/speaker', function (Request $request, Response $response) {
-    $speaker = $request->validate([
-        'name' => 'required|max:255',
-        'record_id' => 'required|integer'
-    ]);
-    Speaker::create($speaker);
-});
+Route::post('/speaker', 'SpeakersController@store');
 
-Route::delete('/speaker/{speaker}', function (Request $request, Response $response, Speaker $speaker) {
-    $speaker->delete();
-});
+Route::delete('/speaker/{speaker}', 'SpeakersController@destroy');
 
 // words
-Route::post('/word', function (Request $request, Response $response) {
-    $words = $request->input('words');
-    $speaker = $request->input('speaker');
+Route::post('/word', 'WordsController@store');
 
-    foreach($words as $word) {
-        $word = (object) $word;
-        if (isset($word->id)) {
-            $word_data = Word::find($word->id);
-            $word_data->count = $word->count;
-            $word_data->save();
-        } else {
-            Word::create(['speaker_id' => $speaker, 'word' => $word->word, 'count' => $word->count]);
-        }
-    }
-    return response()->json($words);
-});
-
-Route::get('/word/{speaker}', function (Request $request, Response $response, $speaker) {
-    $speaker = Speaker::with('words')->find($speaker);
-    $words = $speaker->words;
-    return response()->json($words);
-});
+Route::get('/word/{speaker}', 'WordsController@show');
