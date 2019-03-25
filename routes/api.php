@@ -16,13 +16,13 @@ use App\Record;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
-Route::group(['prefix' => 'records',  'middleware' => 'api'], function()
-{
-    //All the routes that belongs to the group goes here
+// Route::group(['prefix' => 'records',  'middleware' => 'api'], function()
+// {
+//     //All the routes that belongs to the group goes here
 
-});
+// });
